@@ -2,7 +2,7 @@
 
 Author: __*yufanana*__
 
-This documentation was produced from the C++ for Complete Beginners course by John Purcell available for free on caveofprogramming.com and udemy.com.
+This documentation was produced from the C++ for Complete Beginners course by John Purcell available for free on caveofprogramming.com and udemy.com. :)
 </br>
 ____
 
