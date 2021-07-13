@@ -99,6 +99,22 @@ else{
 }
 ```
 
+__? : operator__ <br>
+Exp1 ? Exp2 : Exp3; <br>
+Evaluate Exp1. <br>
+If true, Exp2 is evaluated and becomes the value of the expression. <br>
+If false, Exp3 is evaluated and becomes the value of the expression. <br>
+
+```c++
+if(y < 10>){
+    var = 30;
+} else {
+    var = 40;
+}
+
+var = (y < 10)? 30: 40;
+```
+
 AND `&&` 
 
 OR `||` 
