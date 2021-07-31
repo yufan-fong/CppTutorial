@@ -5,11 +5,58 @@ Author: __*yufanana*__
 This documentation was produced from the C++ for Complete Beginners course by John Purcell available for free on caveofprogramming.com and udemy.com. :)
 </br>
 ____
+## Table of Contents <a name="top"></a>
+
+ 1. [Basic Syntax](#1)<br>
+    1.1 [Hello World](#1.1) <br>
+    1.2 [Namespaces](#1.2) <br>
+    1.3 [User Input](#1.3) <br>
+    1.4 [Data Types](#1.4) <br>
+    1.5 [If, else if, else](#1.5) <br>
+    1.6 [While](#1.6) <br>
+    1.7 [Do](#1.7) <br>
+    1.8 [For](#1.8) <br>
+    1.9 [Arrays](#1.9) <br>
+    1.10 [Switch](#1.10) <br>
+ 2. [Subroutines](#1)<br>
+    2.1 [Functions](#2.1) <br>
+    2.2 [Prototypes](#2.2) <br>
+ 3. [Object Oriented Coding](#3)<br>
+    3.1 [Classes](#3.1) <br>
+    3.2 [Constructors & Destructors](#3.2) <br>
+    3.3 [Overloading Constructors](#3.3) <br>
+    3.4 [Getters & Setters](#3.4) <br>
+    3.5 [Copy Constructors](#3.5) <br>
+    3.6 [Polymorphism](#3.6) <br>
+    3.7 [String Streams](#3.7) <br>
+ 4. [Object Oriented Coding](#4)<br>
+    4.1 [Pointers](#4.1) <br>
+    4.2 [Pointers & Arrays](#4.2) <br>
+    4.3 [Character Arrays](#4.3) <br>
+    4.4 [Reference Variables](#4.4) <br>
+    4.5 [*const* Keyword](#4.5) <br>
+    4.6 [*new* Operator](#4.6) <br>
+ 5. [Inheritance](#5)<br>
+    5.1 [Parent & Sub-class](#5.1) <br>
+    5.2 [Encapsulation](#5.2) <br>
+    5.3 [Inherited Constructors](#5.3) <br>
+ 6. [Miscellaneous](#6)<br>
+    6.1 [2's Complement](#6.1) <br>
+    6.2 [*static* Keyword](#6.2) <br>
+    6.3 [Bitwise Operator](#6.3) <br>
+    6.4 [Pre & Post Fix](#6.4) <br>
+    6.5 [Vectors](#6.5) <br>
+ 7. [Developing a Program](#6)<br>
+    7.1 [Read from File](#7.1) <br>
+    7.2 [Program Design](#7.2) <br>
 
 
-## Section 1: Basic Syntax
+## Section 1: Basic Syntax <a name="1"></a>
+[Go to top](#top)
 
-### 1.1 Hello World
+### 1.1 Hello World <a name="1.1"></a>
+[Go to top](#top)
+
 Use `#include <iostream>` to include the iostream *(input output stream)* file. This allows us to use console functions like `cout` & `cin`.
 
 ```c++
@@ -30,14 +77,18 @@ int main(){
 
 Possible to just do `cout << endl` to add line feed.
 
-### 1.2 Namespaces
+### 1.2 Namespaces <a name="1.2"></a>
+[Go to top](#top)
+
 `namespace` is a declarative region to define the scope of identifiers and prevent name collisions. For example,
 
 `fyf::count()` for my user defined.
 
 `std::count()` as the standard C++ function.
 
-### 1.3 User Input
+### 1.3 User Input <a name="1.3"></a>
+[Go to top](#top)
+
 `>>` can be read as *extract from/extraction operator*.
 
 ```c++
@@ -47,7 +98,9 @@ cin >> age;
 cout << "Your age is " << age << endl;
 ```
 
-### 1.4 Data Types
+### 1.4 Data Types <a name="1.4"></a>
+[Go to top](#top)
+
 Memory may differ from system to system. Should verify on the machine you are using.
 
 Data | Size (bytes) | Range
@@ -85,7 +138,9 @@ Casting can be done to convert one data type to another using `()`.
 
 `value1 = (double)7/2;`
 
-### 1.5 If, else if, else
+### 1.5 If, else if, else <a name="1.5"></a>
+[Go to top](#top)
+
 
 ```c++
 if(condition == 1){
@@ -129,7 +184,9 @@ C++ uses __short-circuit boolean__ evaluation.
 
 Use `&` and `|` to evaluate all expressiosn.
 
-### 1.6 While
+### 1.6 While <a name="1.6"></a>
+[Go to top](#top)
+
 
 ```c++
 while(i<=3){
@@ -138,7 +195,8 @@ while(i<=3){
     }
 ```
 
-### 1.7 Do
+### 1.7 Do <a name="1.7"></a>
+[Go to top](#top)
 
 `do` executes the code at least once, then it checks the condition as a `while` loop.
 
@@ -153,7 +211,9 @@ do{
 } while(input != password);
 ```
 
-### 1.8 For
+### 1.8 For <a name="1.8"></a>
+[Go to top](#top)
+
 Remember to declare __data type__ of counter.
 
 `for(<counter>; <condition>; <code done at end of loop>)`
@@ -167,13 +227,15 @@ for(int i = 0; i<5; i++){
 `break` is used to escape the loop. </br>
 `continue` is used to skip the rest of the loop.
 
-This is a handy trick for a dynamic loop exit condition.
+Below is a handy trick for a dynamic loop exit condition.
 
 ```c++
 int numberOfElements = sizeof(numberArray)/sizeof(int);
 ```
 
-### 1.9 Arrays
+### 1.9 Arrays <a name="1.9"></a>
+[Go to top](#top)
+
 
 Errors will not be given if index is out of range. Array will contain random values or zero if not initialised.
 
@@ -192,13 +254,9 @@ string animals[2][3]={
 };
 ```
 
-This is a handy trick for a dynamic loop exit condition.
+### 1.10 Switch <a name="1.10"></a>
+[Go to top](#top)
 
-```c++
-int numberOfElements = sizeof(numberArray)/sizeof(int);
-```
-
-### 1.10 Switch
 
 Alternative implementation of `if` blocks. Switch case labels can only be used with `int` in default mode, cannot be variables. Add `break` after each case.
 
@@ -221,9 +279,12 @@ default:    // if no case labels matched
 }
 ```
 
-## Section 2: Subroutines
+## Section 2: Subroutines <a name="2"></a>
+[Go to top](#top)
+
 ____
-### 2.1 Functions
+### 2.1 Functions <a name="2.1"></a>
+[Go to top](#top)
 
 Specify return type before the function name. </br>
 `void` has no return type.
@@ -247,7 +308,10 @@ int main(){
 }
 ```
 
-### 2.2 Prototypes
+### 2.2 Prototypes <a name="2.2"></a>
+[Go to top](#top)
+
+
 Prototypes are used at the beginning of the file before the `main` function of in the header files. It serves to tell the program that such a function exists, and to look out for the implementation code later.
 
 If the prototype is in the same `.cpp` as `main`, the following can be done.
@@ -266,14 +330,17 @@ void doSomething(){
 }
 ```
 ____
-## Section 3: Object Oriented Coding
+## Section 3: Object Oriented Coding <a name="3"></a>
+[Go to top](#top)
 
-### 3.1 Classes
+### 3.1 Classes <a name="3.1"></a>
+[Go to top](#top)
+
 Default visibility of `class` is private. </br>
 Default visibility of `struct` is public
 
-Member functions <--> Class methods </br>
-Data members <--> Class properties
+Member functions <--aka--> Class methods </br>
+Data members <--aka--> Class properties
 
 `private` data members/member functions can only be accessed within the class.
 
@@ -293,7 +360,9 @@ class Cat{
 }
 ```
 
-### 3.2 Constructors & Destructors
+### 3.2 Constructors & Destructors <a name="3.2"></a>
+[Go to top](#top)
+
 
 Capitalise the first letter.
 ```c++
@@ -305,7 +374,9 @@ Cat::~Cat(){
     // destroy cat
 }
 ```
-### 3.3 Overloading Constructors
+### 3.3 Overloading Constructors <a name="3.3"></a>
+[Go to top](#top)
+
 
 It is like having different constructing modes, depending on the number of parameters or type of parameters passed.
 
@@ -324,7 +395,9 @@ Person::Person(string newName, int newAge) {
 };
 ```
 
-### 3.4 Getters and Setters
+### 3.4 Getters and Setters <a name="3.4"></a>
+[Go to top](#top)
+
 Used to read or write `private` data members.
 
 ```c++
@@ -336,7 +409,9 @@ string Person::getName() {
 	return name;
 }
 ```
-### 3.5 Copy Constructors
+### 3.5 Copy Constructors <a name="3.5"></a>
+[Go to top](#top)
+
 
 Copies field from `other` object to the present object.
 
@@ -349,10 +424,12 @@ animal1.setName("Freddy");
 Animal animal2 = animal1;      // copy constructor
 ```
 
-### 3.6 Polymorphism
+### 3.6 Polymorphism <a name="3.6"></a>
+[Go to top](#top)
+
 An object can be part of multiple classes. It uses the idea of overloading operators and functions.
 
-Say, `Animal` is a base class. `Cat` is a sub-class of `Animal`, and `HouseCat` is a sub-class of `Cat`. A base class pointer refer to any derived class object.
+Say, `Animal` is a base class. `Cat` is a sub-class of `Animal`, and `HouseCat` is a sub-class of `Cat`. A base class pointer can refer to any derived class object.
 
 ```c++
 Animal* pAnimal1 = new Cat;  
@@ -361,7 +438,9 @@ delete pAnimal1;
 delete pAnimal2;
 ```
 
-### 3.7 String Streams
+### 3.7 String Streams <a name="3.7"></a>
+[Go to top](#top)
+
 
 Special type of string. May be required for certain applications like reading csv files. `cin` is an example of utilisation of streams (I think).
 
@@ -383,12 +462,16 @@ int main() {
 	return 0;
 ```
 ____
-## Section 4: Pointers & Memory
+## Section 4: Pointers & Memory <a name="4"></a>
+[Go to top](#top)
 
-### 4.1 Pointers
+
+### 4.1 Pointers <a name="4.1"></a>
+[Go to top](#top)
+
 
 Use `*` to initialise pointer variables. </br>
-Use `&` to dereference the pointe variable. </br> 
+Use `&` to dereference the pointer variable. </br> 
 Prefix `p` is often given to pointer variables.
 
 ```c++
@@ -408,9 +491,13 @@ cout << "Int value via pointer: " << *pnValue << endl;
 // prints 9
 
 ```
-### 4.2 Pointers & Arrays
+### 4.2 Pointers & Arrays <a name="4.2"></a>
+[Go to top](#top)
 
-Array pointers do not contain information about memory size. Array pointers can be incremented to iterate through the array. Possible to compare pointers `pTexts != pEnd`.
+
+Array pointers do not contain information about memory size. <br>
+Array pointers can be incremented to iterate through the array. <br>
+Possible to compare pointers `pTexts != pEnd`.
 
 ```c++
 string texts[] = {"one","two","three","four"};
@@ -429,7 +516,9 @@ cout << endl;
 `string *pElement = texts;` gives address of first element </br>
 `string *pEnd = &texts[length];` gives address of last element
 
-### 4.3 Character Arrays
+### 4.3 Character Arrays <a name="4.3"></a>
+[Go to top](#top)
+
 
 Strings as `char` arrays have to be null terminated.</br>
 `char text1[6] = {'h','e','l','l','o',0};` </br>
@@ -438,27 +527,36 @@ Blank will be printed if the 5th index is printed here. </br>
 `char text2[] = "hello";` </br>
 Thus, should stop iterating right before the NULL terminating character to avoid dealing with blanks/NULL.
 
-### 4.4 Reference Variables
+### 4.4 Reference Variables <a name="4.4"></a>
+[Go to top](#top)
 
-Reference variables is like the same as the original variable. Use a single `&` to use as a reference variables.
 
-`&value4` is a reference variable of `value3`. `&value4` cannot hold a new value. Any edits made to `value4` will apply to `value3` too. They are the same thing.
+Reference variables is like the same as the original variable. <br>
+Prefix a variable with a single `&` to use as a reference variable.
+
 ```c++
 int value3 = 8;
 int &value4 = value3;     
 ```
+In the example above, `&value4` is a reference variable of `value3`. <br>
+`&value4` cannot hold a new value. <br>
+Any edits made to `value4` will apply to `value3` too. They are the same thing.
 
-### 4.5 *const* Keyword
+
+### 4.5 *const* Keyword <a name="4.5"></a>
+[Go to top](#top)
+
 
 `const` disallows any change in object properties when used in member funtions (helps reduce bugs), or any change in value when used for variables.
 
-`const` variables requires inline declaration and definition. </br>
+`const` variables requires inline declaration and definition. *e.g.* </br>
 `const double PI = 3.141592;`
 
-*Convention* </br>
-Use uppercase for `const` variables e.g. `PI, SCREEN_WIDTH, NPARTICLES`.
+*Convention*: use uppercase for `const` variables e.g. `PI, SCREEN_WIDTH, NPARTICLES`.
 
-### 4.6 *new* Operator
+### 4.6 *new* Operator <a name="4.6"></a>
+[Go to top](#top)
+
 
 Returns a pointer to an object created in the heap. </br>
 `delete` has to be called whenever `new` is used to free up memory resources or avoid memory leak. </br>
@@ -479,9 +577,13 @@ delete [] pMem;
 ```
 ____
 
-## Section 5: Inheritance
+## Section 5: Inheritance <a name="5"></a>
+[Go to top](#top)
 
-### 5.1 Parent & Sub-class
+
+### 5.1 Parent & Sub-class <a name="5.1"></a>
+[Go to top](#top)
+
 
 Here, `Cat` is a sub-class of `Animal`.
 ```c++
@@ -490,17 +592,19 @@ class Cat: public Animal {
 };
 ```
 
-### 5.2 Encapsulation
+### 5.2 Encapsulation <a name="5.2"></a>
+[Go to top](#top)
 
-Encapsulation is the concept that binds together the data and functions that manipulate data, keeping them safe from outside interference and misuse. This led to the concept of __data hiding__.
+Encapsulation is the concept of binding the data and the functions that manipulate the data together, keeping them safe from outside interference and misuse. This led to the concept of __data hiding__.
 
 This allows for __data abstration__ where only the interfaces are exposed, and hiding the implementation details from the user.
 
-*I think this is specific to `private` members*.
+*YuFan: I think this is specific to private members*.
 
-### 5.3 Inherited Constructors
+### 5.3 Inherited Constructors <a name="5.3"></a>
+[Go to top](#top)
 
-If a sub-class object is created, the parent class constructor will called first, followed by the sub-class constructor.
+If a sub-class object is created, the parent class constructor will be called first, followed by the sub-class constructor.
 
 Constructors can only be inherited from direct super class.
 ```c++
@@ -521,21 +625,28 @@ public:
     // constructors are not auto inherited from super class
 };
 ```
-## Section 6: Odds and Ends
+## Section 6: Miscellaneous <a name="6"></a>
+[Go to top](#top)
 
-### 6.1 2's Complement
+### 6.1 2's Complement <a name="6.1"></a>
+[Go to top](#top)
 
 It is a method to deal with arithmetic operation in computers at the bit-level. `min = -max - 1`
 
 There is also a 1's complement method.
 
-### 6.2 *static* Keyword
+### 6.2 *static* Keyword <a name="6.2"></a>
+[Go to top](#top)
 
-`static` variables are associated with the class, not the object. They are shared between all objects of the class. They exist even when no objects are instantiated. Objects are able to change static variables. 
+`static` variables are associated with the class, not the object. <br>
+They are shared between all objects of the class. <br>
+They exist even when no objects are instantiated. <br>
+Objects are able to change static variables. 
 
 `static` functions can only access `static` variables.
 
-### 6.3 Bitwise Operator
+### 6.3 Bitwise Operator <a name="6.3"></a>
+[Go to top](#top)
 
 Bitwise operators work at bit-level by comparing the 1's and 0's.
 
@@ -546,8 +657,10 @@ E.g. `&` AND operator
 |mask | 111111110000000000000000|
 |result | 101011000000000000000000|
 
-https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/ is a good summary haha.
-### 6.4 Pre & Post Fix
+[GeeksforGeeks](https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/) has a good summary haha.
+
+### 6.4 Pre & Post Fix <a name="6.4"></a>
+[Go to top](#top)
 
 `value++`: use the variable, then implement operator
 `++value`: implement operator, then use the variable
@@ -564,7 +677,8 @@ int value = 1;
 std::cout << "Prefix: " << ++value << std::endl;
 ```
 
-### 6.5 Vectors
+### 6.5 Vectors <a name="6.5"></a>
+[Go to top](#top)
 
 Vectors are more versatile than arrays. `#include <vector>` is required. Possible to have a vector of vectors. </br>
 `vector<vector<double>> data;`
@@ -573,9 +687,11 @@ Vectors are more versatile than arrays. `#include <vector>` is required. Possibl
 
 
 
-## Section 7: Developing a Program
+## Section 7: Developing a Program <a name="7"></a>
+[Go to top](#top)
 
-### 7.1 Read from file
+### 7.1 Read from File <a name="7.1"></a>
+[Go to top](#top)
 
 `getline(myFile, line)` returns true when there is still a new line to be read.
 
@@ -630,6 +746,10 @@ int main(){
 }
 ```
 
-### 7.2 Program Design
+### 7.2 Program Design <a name="7.2"></a>
+[Go to top](#top)
+
 __Header files__ </br>
-Can be designed in mind for it to be reusable in other contexts. So, try to design code unique to your context in a separate file. And possibly transferrable files should not reference those unique files.
+Can be designed in mind for it to be reusable in other contexts. <br>
+So, try to design code unique to your context in a separate file. <br>
+And possibly transferrable files should not reference those unique files.
