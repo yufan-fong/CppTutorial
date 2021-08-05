@@ -19,6 +19,7 @@ ____
     1.8 [For](#1.8) <br>
     1.9 [Arrays](#1.9) <br>
     1.10 [Switch](#1.10) <br>
+    1.11 [Conventions](#1.11) <br>
  2. [Subroutines](#1)<br>
     2.1 [Functions](#2.1) <br>
     2.2 [Prototypes](#2.2) <br>
@@ -41,6 +42,7 @@ ____
     5.1 [Parent & Sub-class](#5.1) <br>
     5.2 [Encapsulation](#5.2) <br>
     5.3 [Inherited Constructors](#5.3) <br>
+    5.4 [*virtual* Keyword] (#5.4) <br>
  6. [Miscellaneous](#6)<br>
     6.1 [2's Complement](#6.1) <br>
     6.2 [*static* Keyword](#6.2) <br>
@@ -279,6 +281,12 @@ default:    // if no case labels matched
     cout << "Unrecognised value" << endl;
 }
 ```
+### 1.11 Conventions <a name="1.11"></a>
+[Go to top](#top)
+
+Following Java type convention, <br>
+Variables are given lower case letters. <br>
+Classes are given upper case letters.
 
 ## Section 2: Subroutines <a name="2"></a>
 [Go to top](#top)
@@ -626,6 +634,16 @@ public:
     // constructors are not auto inherited from super class
 };
 ```
+
+### 5.4 *virtual* Keyword <a name="5.4"></a>
+[Go to top](#top)
+
+Virtual functions in derived classes are used to override/re-defined member functions in the base class.
+
+So, derived class objects will call the virtual function instead of the original base class member function.
+
+More information from [GeeksforGeeks](https://www.geeksforgeeks.org/virtual-function-cpp/).
+
 ## Section 6: Miscellaneous <a name="6"></a>
 [Go to top](#top)
 
@@ -685,8 +703,6 @@ Vectors are more versatile than arrays. `#include <vector>` is required. Possibl
 `vector<vector<double>> data;`
 
 `push_back()` adds the element to the back of the array.
-
-
 
 ## Section 7: Developing a Program <a name="7"></a>
 [Go to top](#top)
