@@ -456,3 +456,105 @@ bool operator<(const Test &other) const {
     return name < other.name;
 }
 ```
+### 4.9 Stacks
+
+Data structure, last in first out (LIFO).
+
+#### Methods
+
+`.push()` to add element to top of stack.
+
+`.pop()` returns and removes the element from top of stack.
+
+`.top()` returns a shallow copy of the top element .
+
+### 4.10 Queues
+
+Data strucutre, first in first out (FIFO).
+
+#### Methods
+
+`.push()` to add element to end of queue.
+
+`.pop()` to remove element from front of queue.
+
+`.front()` returns a shallow copy of the element at the front of queue.
+
+### 4.11 Deque & Friend
+
+`friend` functions are functions that do not belong to a class, but it can access the class' private members. <br>
+
+friend prototypes are contained in class definition
+
+
+```c++
+class Test{
+    friend bool comp(const Test &a, const Test &b);
+    // friend function prototype
+};
+
+bool comp(const Test &a, const Test &b){
+    // friend function definition
+    return a.name < b.name;
+}
+
+```
+
+## Section 5: Operator Overloading
+
+### 5.1 Assignment Operator
+
+`=` is the assignment operator. <br>
+e.g.    `test2 = test1` , `test2.operator=(test1);`
+
+In `test2 = test1;`, the assignment operator is called by test2, with test1 passed as a parameter.
+
+Methods receive an implicit first argument, that is the reference to the object that calls the method. Thus, the assignment method is a binary operator with 2 arguments.
+
+`test3 = test2 = test1;` method chaining <br>
+Thus, it should return a *const* reference to the object that calls the method.
+
+`Test test4 = test1;` does not run the assignment operator, but the copy constructor instead.
+
+#### Implementation
+1. *const* method that does not change the objects (`this` and `other`). 
+2. Takes in references to objects (`&other`) as this is more efficient. 
+3. Returns a reference to the object that calls the method (`this`).
+
+```c++
+const Test &operator=(const Test &other){
+    std::cout << "Assignment running" << std::endl;
+    this->id = other.id;
+    this->name = other.name;
+    return *this;
+}
+```
+
+C++ Rule of 3: assignment operator, copy constructor, destructor. <br>
+If any one of the above is defined, the other 2 should be defined as well.
+
+### 5.2 Left Bit Shift Operator
+
+`cout << endl;`, it has left-right associativity. <br>
+i.e., executes from left to right
+
+`cout` is an object from the `ostream` class.
+
+```c++
+friend std::ostream &operator<<(std::ostream &out, const Test &test){
+    out << test.id << ": " << test.name;
+    // endl not needed here since it's present in the main code
+    return out;
+}
+```
+
+For non-friend implementation, the get methods have to be public and const.
+```c++
+std::ostream &operator<<(std::ostream &out, const Complex &c){
+    out << "(" << c.getReal() << "," << c.getImaginary() << ")";
+    return out;
+}
+```
+
+### 5.3 Complex Number Class
+
