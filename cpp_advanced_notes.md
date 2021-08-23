@@ -556,5 +556,67 @@ std::ostream &operator<<(std::ostream &out, const Complex &c){
 }
 ```
 
-### 5.3 Complex Number Class
+### 5.3 Plus Operator
 
+`+` is the plus operator. Non-binary operator. <br>
+e.g. `c1 + c2`
+
+It takes in *const* objects, and returns a new object that is not *const*. <br>
+Consider the different data types and combinations.
+
+```c++
+// header file
+Complex operator+(const Complex &c1, const Complex &c2);
+Complex operator+(const Complex &c1, double d);
+Complex operator+(double d, const Complex &c1);
+
+// implementation
+Complex operator+(const Complex &c1, const Complex &c2){
+    // complex as both parameters
+    return Complex(c1.getReal() + c2.getReal(), c1.getImaginary() + c2.getImaginary());
+}
+
+Complex operator+(const Complex &c1, double d){
+    // double as 2nd parameter
+    return Complex(c1.getReal()+d, c1.getImaginary());
+}
+
+Complex operator+(double d, const Complex &c1){
+    // double as 1st parameter
+    return Complex(c1.getReal()+d, c1.getImaginary());
+};
+```
+
+### 5.4 Equality Operator
+
+`==` is the equality operator. Binary operator. <br>
+The operator should be defined in the class definition. <br>
+Returns a boolean value.
+
+```c++
+// header file
+bool operator==(const Complex &other);
+
+// implementation
+bool Complex::operator==(const Complex &other){
+    return (real == other.real) && (imaginary == other.imaginary);
+}
+```
+
+Separate definition should be done for `!=` as well.
+
+### 5.5 Dereference Operator
+
+`*` is the dereference operator. <br>
+The operator should be defined in the class definition. <br>
+Returns a new complex number object.
+
+```c++
+// header file
+Complex operator*() const;
+
+// implementation
+Complex Complex::operator*() const{
+    return Complex(real, -imaginary);
+}
+```
