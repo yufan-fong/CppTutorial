@@ -6,13 +6,51 @@ This documentation was produced from the Advanced C++ Programming course by John
 </br>
 ____
 
-## Section 1: Introduction
+## Table of Contents <a name="top"></a>
+
+1. [Introduction](#1)<br>
+2. [Exceptions](#2)<br>
+    2.1 [Basics](#2.1)<br>
+    2.2 [Standard](#2.2)<br>
+    2.3 [Custom](#2.3)<br>
+    2.4 [Catching Order](#2.4)<br>
+3. [Files](#3)<br>
+    3.1 [Writing](#3.1)<br>
+    3.2 [Reading](#3.2)<br>
+    3.3 [Parsing](#3.3)<br>
+    3.4 [Structs & Padding](#3.4)<br>
+    3.5 [Binary Files](#3.5)<br>
+4. [Standard Template Library](#4)<br>
+    4.1 [Vectors](#4.1)<br>
+    4.2 [Vectors & Memory](#4.2)<br>
+    4.3 [2D Vectors](#4.3)<br>
+    4.4 [Lists](#4.4)<br>
+    4.5 [Maps](#4.5)<br>
+    4.6 [Custom Objects as Map Values](#4.6)<br>
+    4.7 [Custom Objects as Map Keys](#4.7)<br>
+    4.8 [Multimaps](#4.8)<br>
+    4.9 [Stacks](#4.9)<br>
+    4.10 [Queues](#4.10)<br>
+    4.11 [Deque & Friend](#4.11)<br>
+5. [Operator Overloading](#5)<br>
+    5.1 [= Assignment Operator](#5.1)<br>
+    5.2 [<< Left Bit Shift Operator](#5.2)<br>
+    5.3 [+ Plus Operator](#5.3)<br>
+    5.4 [== Eqaulity Operator](#5.4)<br>
+    5.5 [* Dereference Operator](#5.5)<br>
+
+
+## Section 1: Introduction<a name="1"></a>
+[Go to top](#top)
 
 Source code for all the projects can be found at this GitHub [wiki])https://github.com/caveofprogramming/advanced-cplusplus/wiki).
 
-## Section 2: Exceptions
+## Section 2: Exceptions<a name="2"></a>
+[Go to top](#top)
 
-### 2.1 Basics
+### 2.1 Basics<a name="2.1"></a>
+[Go to top](#top)
+
 Error handling function. Different application scenarios: <br>
 - Errors that the program cannot recover from
 - Errors that are likely to occur
@@ -47,7 +85,8 @@ int main(){
 }
 ```
 
-### 2.2 Standard
+### 2.2 Standard<a name="2.2"></a>
+[Go to top](#top)
 
 There are built-in/common error types that can be used to catch exceptions.  
 
@@ -63,7 +102,9 @@ int main(){
 }
 ```
 
-### 2.4 Custom
+### 2.3 Custom<a name="2.3"></a>
+[Go to top](#top)
+
 
 Inherit from the C++ built-in class if possible. Documentation [here](https://en.cppreference.com/w/cpp/error/exception).
 
@@ -79,13 +120,15 @@ public:
 };
 ```
 
-### 2.5 Catching Order
+### 2.4 Catching Order<a name="2.4"></a>
+[Go to top](#top)
 
 Sub-class errors can be caught be parent-class errors. <br>
 So, catch errors from the sub-class first, before catching errors from the parent class. <br>
 e.g. `std::bad_alloc` is a sub-class error of `std::exceptions`
 
-## Section 3: Files
+## Section 3: Files<a name="3"></a>
+[Go to top](#top)
 
 Header files may differ for different IDEs.
 ```c++
@@ -93,7 +136,8 @@ Header files may differ for different IDEs.
 #include <fstream>  // filestream
 ```
 
-### 3.1 Writing
+### 3.1 Writing<a name="3.1"></a>
+[Go to top](#top)
 
 Open the file using `fstream` or `ofstream`. <br>
 Good to check whether file was opened. <br>
@@ -122,7 +166,8 @@ int main(){
 }
 ```
 
-### 3.2 Reading
+### 3.2 Reading<a name="3.2"></a>
+[Go to top](#top)
 
 Open file as an input file. <br>
 Use the `getline()` function together with a loop to iterate through each line in the file. <br>
@@ -154,7 +199,8 @@ int main(){
 }
 ```
 
-### 3.3 Parsing
+### 3.3 Parsing<a name="3.3"></a>
+[Go to top](#top)
 
 Open file as input file. <br>
 Delimiters (e.g. `,`,`:`) are like markers to split up/parse the lines. <br>
@@ -192,20 +238,24 @@ int main(){
 }
 ```
 
-### 3.4 Structs & Padding
+### 3.4 Structs & Padding<a name="3.4"></a>
+[Go to top](#top)
 
 Structs are used to map binary data to struct members. <br>
 Padding is implemented to make the processing more efficient. <br>
 Can read more from [GeeksforGeeks](https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/)
 
-### 3.5 Reading & Writing Binary Files
+### 3.5 Binary Files<a name="3.5"></a>
+[Go to top](#top)
 
 `.bin` are binary files.
 
 
-## Section 4: Standard Template Library
+## Section 4: Standard Template Library<a name="4"></a>
+[Go to top](#top)
 
-### 4.1 Vectors
+### 4.1 Vectors<a name="4.1"></a>
+[Go to top](#top)
 
 Header file: `#include <vector>`
 
@@ -231,7 +281,8 @@ Calling a non-existent index of a vector is an undefined behaviour. Careful that
 
 `.end()` to get pointer to last element
 
-### 4.2 Vectors & Memory
+### 4.2 Vectors & Memory<a name="4.2"></a>
+[Go to top](#top)
 
 Vectors are stored as continuous lists.
 
@@ -245,7 +296,8 @@ To minimise delays in the program, operations like insertion should be relativel
 
 `.resize()` does not change the vector's capacity.
 
-### 4.3 2D Vectors
+### 4.3 2D Vectors<a name="4.3"></a>
+[Go to top](#top)
 
 Vector of vectors. <br>
 Can create jagged arrays in which member arrays are have different lengths.
@@ -253,7 +305,8 @@ Can create jagged arrays in which member arrays are have different lengths.
 `vector<vector<int>> grid(3, vector<int>(4,1));` <br>
 Creates a 2D vector with 3 rows, 4 cols, and each element is intialised with `1`.
 
-### 4.4 Lists
+### 4.4 Lists<a name="4.4"></a>
+[Go to top](#top)
 
 Header file: `#include <list>`
 
@@ -275,7 +328,8 @@ Use pointers to traverse the list instead of index. <br>
 
 `.erase(it)` invalidates the iterator used and returns a pointer to the next element.
 
-### 4.5 Maps
+### 4.5 Maps<a name="4.5"></a>
+[Go to top](#top)
 
 Header file: `#include <map>`
 
@@ -328,8 +382,8 @@ if(ages.find("Raj") != ages.end()){
     }
 ```
 
-
-### 4.6 Custom Objects as Map Values
+### 4.6 Custom Objects as Map Values<a name="4.6"></a>
+[Go to top](#top)
 
 When constructors are overloaded with custom constructors, the default constructor without parameters is removed. So, the default constructor without parameters should be defined again in the class.
 
@@ -347,7 +401,8 @@ people[0] = Person("Mike", 40);
 1. `Person("Ali",24)` calls the Person constructor with parameters.
 2. Copy constructor is then called twice (not sure why)
 
-### 4.7 Custom Objects as Map Keys
+### 4.7 Custom Objects as Map Keys<a name="4.7"></a>
+[Go to top](#top)
 
 Since maps are sorted in an order, the comparison operator (<) has to be overloaded (custom definition).
 ```c++
@@ -377,7 +432,8 @@ bool operator<(const Person &other) const{
     }
 ```
 
-### 4.7 Multimaps
+### 4.8 Multimaps<a name="4.8"></a>
+[Go to top](#top)
 
 Multimaps allows for duplicate keys to exist.
 
@@ -412,7 +468,8 @@ for(std::multimap<int, std::string>::iterator it=its.first; it!=its.second; it++
 
 Or, simpler way is to use `auto its = namelist.equal_range(30);`
 
-### 4.8 Sets
+### 4.9 Sets<a name="4.9"></a>
+[Go to top](#top)
 
 `#include <set>`
 
@@ -456,7 +513,8 @@ bool operator<(const Test &other) const {
     return name < other.name;
 }
 ```
-### 4.9 Stacks
+### 4.10 Stacks<a name="4.10"></a>
+[Go to top](#top)
 
 Data structure, last in first out (LIFO).
 
@@ -468,7 +526,8 @@ Data structure, last in first out (LIFO).
 
 `.top()` returns a shallow copy of the top element .
 
-### 4.10 Queues
+### 4.11 Queues<a name="4.11"></a>
+[Go to top](#top)
 
 Data strucutre, first in first out (FIFO).
 
@@ -480,7 +539,8 @@ Data strucutre, first in first out (FIFO).
 
 `.front()` returns a shallow copy of the element at the front of queue.
 
-### 4.11 Deque & Friend
+### 4.12 Deque & Friend<a name="4.12"></a>
+[Go to top](#top)
 
 `friend` functions are functions that do not belong to a class, but it can access the class' private members. <br>
 
@@ -500,9 +560,11 @@ bool comp(const Test &a, const Test &b){
 
 ```
 
-## Section 5: Operator Overloading
+## Section 5: Operator Overloading<a name="5"></a>
+[Go to top](#top)
 
-### 5.1 Assignment Operator
+### 5.1 Assignment Operator<a name="5.1"></a>
+[Go to top](#top)
 
 `=` is the assignment operator. <br>
 e.g.    `test2 = test1` , `test2.operator=(test1);`
@@ -533,7 +595,8 @@ const Test &operator=(const Test &other){
 C++ Rule of 3: assignment operator, copy constructor, destructor. <br>
 If any one of the above is defined, the other 2 should be defined as well.
 
-### 5.2 Left Bit Shift Operator
+### 5.2 Left Bit Shift Operator<a name="5.2"></a>
+[Go to top](#top)
 
 `cout << endl;`, it has left-right associativity. <br>
 i.e., executes from left to right
@@ -556,7 +619,8 @@ std::ostream &operator<<(std::ostream &out, const Complex &c){
 }
 ```
 
-### 5.3 Plus Operator
+### 5.3 Plus Operator<a name="5.3"></a>
+[Go to top](#top)
 
 `+` is the plus operator. Non-binary operator. <br>
 e.g. `c1 + c2`
@@ -587,7 +651,8 @@ Complex operator+(double d, const Complex &c1){
 };
 ```
 
-### 5.4 Equality Operator
+### 5.4 Equality Operator<a name="5.4"></a>
+[Go to top](#top)
 
 `==` is the equality operator. Binary operator. <br>
 The operator should be defined in the class definition. <br>
@@ -605,7 +670,8 @@ bool Complex::operator==(const Complex &other){
 
 Separate definition should be done for `!=` as well.
 
-### 5.5 Dereference Operator
+### 5.5 Dereference Operator<a name="5.5"></a>
+[Go to top](#top)
 
 `*` is the dereference operator. <br>
 The operator should be defined in the class definition. <br>
@@ -619,4 +685,75 @@ Complex operator*() const;
 Complex Complex::operator*() const{
     return Complex(real, -imaginary);
 }
+```
+
+## Section 6: Template Classes & Functions<a name="6"></a>
+[Go to top](#top)
+
+### 6.1 Template Classes<a name="6.1"></a>
+[Go to top](#top)
+
+`template<class T>` <br>
+Classes that work with types of variables specified by the user. <br>
+Convention to name the variable type with a single letter.
+
+`T` can be treated as a generic data type like int, string, etc. <br>
+The data type is specified by the user in the main code. `Test<std::string> test1("Hello");`
+
+The methods defined in `class Test` assumes that they will work for the data type defined by the user.
+
+```c++
+template<class T>
+class Test{
+private:
+    T obj;
+public:
+    Test(T obj){
+        this->obj = obj;
+    }
+
+    void print(){
+        std::cout << obj << std::endl;
+    }
+};
+```
+
+Possible to have `template<class T, class K>`
+
+It is bad practice for the methods to enquire the variable type and then execute the methods accordingly, because this defeats the purpose of template classes. 
+
+### 6.2 Template Functions<a name="6.2"></a>
+[Go to top](#top)
+
+Creates a function that works with the specified type. <br>
+The variable type is specified by the user in the main code. `print<int>(5);`
+
+```c++
+template<class T> // or template<typename T>
+void print(T n){
+    std::cout << n << std::endl;
+}
+```
+
+## Section 7: Passing Functions to Functions<a name="7"></a>
+[Go to top](#top)
+
+### 7.1 Function Pointers<a name="7.1"></a>
+[Go to top](#top)
+
+Create a pointer to a function, and call the function via the pointer.
+
+Pointer should have the same return type and the parameter list (number and type). <br>
+The variable is essentially a pointer. <br>
+Use round brackets `()` to call the function.
+
+```c++
+void (*pTest)();    // creates function pointer that takes no parameters, returns void
+pTest = &test;      // set pTest to the defined function
+(*pTest)();         // dereference the pointer, call the function with ()
+```
+
+```c++
+void (*pTest)() = test;
+pTest();
 ```
