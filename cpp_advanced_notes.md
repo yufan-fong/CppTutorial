@@ -38,6 +38,11 @@ ____
     5.3 [+ Plus Operator](#5.3)<br>
     5.4 [== Eqaulity Operator](#5.4)<br>
     5.5 [* Dereference Operator](#5.5)<br>
+6. [Template Classes & Functions](#6)<br>
+    6.1 [Template Classes](#6.1)<br>
+    6.2 [Template Functions](#6.2)<br>
+7. [Passing Functions to Functions](#7)<br>
+    7.1 [Function Pointers](#7.1)<br>
 
 
 ## Section 1: Introduction<a name="1"></a>
@@ -259,7 +264,8 @@ Can read more from [GeeksforGeeks](https://www.geeksforgeeks.org/structure-membe
 
 Header file: `#include <vector>`
 
-`std::vector<std::string> strings;`
+`std::vector<std::string> strings;` <br>
+`std::vector<int> numbers {4,2,55,2};`
 
 Vector is a template class. <br>
 Vectors can be presized in its instantiation, e.g. `vector<int> ages[4];` <br>
@@ -757,3 +763,142 @@ pTest = &test;      // set pTest to the defined function
 void (*pTest)() = test;
 pTest();
 ```
+
+### 7.2 Abstract Class
+
+Contains methods without implementation (i.e. pure virtual functions) <br>
+OR does not implement all the virtual classes from the parent class.
+
+Once all the virtual functions has been implemented, the class is a concrete class. <br>
+Objects of a concrete class can be instantiated. <br>
+Abstract classes cannot be instantiated.
+
+```c++
+class Animal{   //abstract class
+public:
+    virtual void speak() = 0; // =0 means no implementation
+};
+```
+
+### 7.3 Functors
+
+Passing blocks of code, alternative to function pointers.
+
+Functors are classes/structs that overloads at least 1 operator.
+
+```c++
+struct MatchTest {       // functor
+  bool operator()(std::string &text){
+      return text == "lion";
+  }
+};
+```
+
+## Section 8: C++ 11 Features
+
+### 8.1 Decltype, Typeid & Name Mangling
+
+`#include <typeinfo>` to use Typeid
+
+`typeid(value).name()` to get the name of the data type.
+
+*Name Mangling:* <br>
+Name mangling is the encoding of function and variable names into unique names so that linkers can separate common names in the language. Type names may also be mangled. Name mangling is commonly used to facilitate the overloading feature and visibility within different scopes
+
+e.g. `NSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE`
+
+`decltype` to declare variables of an existing type. <br>
+e.g. `decltype(value) name = "Bob";`
+
+### 8.2 *Auto*
+
+For variables, <br>
+`auto` will look at the value that is used to initialised the variable, and use that data type. <br>
+Comes in handy when the variable declaration is lengthy. <br>
+e.g. `auto number = 7;`
+
+For functions, <br>
+Should use the `->` to indicate the trailing return type
+
+```c++
+auto test(value) -> int {
+    return value;
+}
+```
+
+OR use template classes
+
+```c++
+template <class T>
+auto test(T value) -> decltype(value) {
+    return value;
+}
+```
+
+### 8.3 Range-based Loops
+
+`for(auto name: animals){}` where animals is an iterable item (e.g. string, array, vector), and name is the iterator. 
+
+```c++
+auto animals = {"dog", "cat", "lion"};
+for(auto name: animals){
+    std::cout << name << std::endl;
+}
+
+std::vector<int> numbers{4,2,251}; 
+for(int number: numbers){
+        std::cout << number << std::endl;
+    }
+```
+
+### 8.4 Nested Template Classes
+
+A class that is defined within a class.
+
+```c++
+class ring{             // outer class
+public:
+    class iterator;     // nested class
+};
+
+class ring::iterator{   // inner nested class
+public:
+    void print(){
+        std::cout << "Hello from iterator" << std::endl;
+    }
+};
+```
+
+### 8.5 Iterable Classes
+
+For example, create a `ring` class as a ring buffer. <br>
+Define the methods and variables needed for iteration.
+
+```c++
+for(ring<std::string>::iterator it=textring.begin(); it != textring.end(); it++){
+        std::cout << *it << std::endl;
+    }
+```
+__For ring class,__ <br>
+`.begin()` returns an interator. <br>
+`.end()` returns an interator. <br>
+
+__For iterator nested class__, <br>
+`it++` returns the ring object. <br>
+`!=` overloads the operator, returns bool. <br>
+`*it` returns the value at the iterator's position. <br>
+
+The iterable class has `m_pos` and `m_ring` members. <br>
+Iterator class is friendly, but it cannot access the private members (e.g. m_size, m_pos, m_values). <br>
+So, need to pass a reference to the ring object
+
+### 8.6 Initialisation
+
+In C++11, can use {} inline to initialise.
+
+| C++ 98 | C++ 11|
+| :--- | :--- |
+|`int value = 5;` | `int value{5};`|
+|`int value;` | `int value{};`|
+|`int numbers[] = {4,2,3,1};` | `int numbers[]{4,2,3,1};` |
+|`int *pInts = new int[4];` | `int *pInts = new int[4]{33,2,1,44};` |
