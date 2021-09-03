@@ -782,8 +782,8 @@ public:
 
 ### 7.3 Functors
 
-Passing blocks of code, alternative to function pointers.
-
+Passing blocks of code, alternative to function pointers. <br>
+It is an object (?). <br>
 Functors are classes/structs that overloads at least 1 operator.
 
 ```c++
@@ -902,3 +902,69 @@ In C++11, can use {} inline to initialise.
 |`int value;` | `int value{};`|
 |`int numbers[] = {4,2,3,1};` | `int numbers[]{4,2,3,1};` |
 |`int *pInts = new int[4];` | `int *pInts = new int[4]{33,2,1,44};` |
+
+### 8.7 Initialisation List
+
+The constructor takes in a list `{}` for initialisation.
+
+```c++
+class Test{
+    Test(std::initializer_list<std::string> texts){
+            for(auto value: texts){
+                std::cout << value << std::endl;
+            }
+        }
+}
+
+Test fruits{"orange", "banana","apple"};    
+```
+
+### 8.8 Object Initialisation, Default, Delete
+
+When a custom constructor is defined (e.g. with paramters), the default constructor (with no paramaters) is lost. <br>
+So, if you would like to keep the default constructor, `Person() = default;`
+
+`delete` will remove the default implementation. <br>
+e.g. `Person &operator=(const Person &other) = delete;`
+
+### 8.9 Lambda Expressions
+
+Anonymous function. Can be passed around like a function pointer. <br>
+Return type can be infered by C++11.
+
+`[](){};` <br>
+- `{}` contains the code implementation.
+- `()` contains the parameters
+- `[]` to capture variables into the lambda scope.
+
+```c++
+std::string time = "Morning";
+auto pGreet = [time](std::string name){std::cout << time << ", " << name << std::endl;};
+pGreet("Mike");
+```
+
+To change the captured variable, include the keyword mutable.
+```c++
+int cats = 5;
+[cats]() mutable {      // capture cats by value
+    cats = 8;           // mutable allows cats value to change
+    std::cout << cats << std::endl;
+}();
+```
+
+### 8.10 Standard Function Type
+
+Takes in anything that is callable with the specified return type and parameter type. <br>
+It will then use that function inside the implementation.
+
+```c++
+// standard function
+void run(std::function<bool(std::string&)> check){
+    // any function that has bool return type, string parameter
+    std::string test = "dog";
+    std::cout << check(test) << std::endl;
+    // in this case, check contains the implementation of check1
+}
+
+run(check1); // check can be functor, function pointer or lambda expression
+```

@@ -45,6 +45,7 @@
         "iterator": "cpp",
         "list": "cpp",
         "set": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "functional": "cpp"
     }
 }

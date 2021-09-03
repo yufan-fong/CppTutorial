@@ -20,7 +20,7 @@ void check(std::string &text, Test &test){
 }
 
 int main(){
-    MatchTest pred;
+    MatchTest pred;     // create an object
     std::string specie = "lion";
     std::cout << pred(specie) << std::endl;
 
