@@ -968,3 +968,219 @@ void run(std::function<bool(std::string&)> check){
 
 run(check1); // check can be functor, function pointer or lambda expression
 ```
+
+### 8.11 Constructors & Memory
+
+Allocate memory for new *int* array that contains `SIZE` elements. <br>
+The `{}` initialises each element to 0. <br> 
+`_pBuffer = new int[SIZE]{};`
+
+To copy memory from one array to another, <br>
+`memcpy(_pBuffer, other._pBuffer, SIZE*sizeof(int));`
+
+It is possible to have a constructor call another constructor to minimise the amount of code.
+
+Remember to `delete [] _pBuffer` in the destructor to free up memory.
+
+### 8.12 LValues and RValues
+
+`int value1 = 7;` <br>
+value1 is the LValue, 7 is the RValue.
+LValues are typically (normal) references. <br>
+RValues are typically temporary values. <br>
+LValue references cannot take addresses of RValues. `int *pValue1 = 7;` <br>
+LValue references can take addresses of LValues. `int *pValue1 = &value1;`
+Note that functions return temporary values, can be considered as RValues.
+
+Commented lines give errors.
+```c++
+int *pValue1 = &value1;
+// int *pValue1 = &7;
+
+Test *pTest1 = &test1;
+// Test *pTest1 = &getTest();
+// functions return temp values
+
+int *pValue2 = &++value1;
+// int *pValue2 = &value1++;
+// int *s = &(7+value1);
+```
+
+*const* LValue references can bind to RValues, <br>
+because the lifetime of RValue returned from function is extended until the reference is destroyed.
+
+`const Test &rTest2 = getTest();`
+
+__RValue References__ <br>
+Identify temporary variables and handle them differently from non-temporary variables, to reduce inefficiency and optimise the code.
+
+RValue references can point to RValues. <br>
+
+__Overload Functions__ <br>
+Can overload functions based on the whether the parameter is L or R Value.
+
+```c++
+void check(const Test &value){
+    std::cout << "LValue function" << std::endl;
+}
+
+void check(Test &&value){
+    std::cout << "RValue function" << std::endl;
+}
+```
+
+### 8.13 Move Constructors/Assignment
+
+Copy constructors
+- works with LValue references, copy semantics
+- copies the actual data of the object to another object instead of making another object to point to the already existing objet in the heap.
+
+Move constructors
+- works with RValue references, move semantics
+- points to the already existing object in the memory
+- nulls out the pointer to the temp objects
+- executed when a new object is constructed
+
+__Task: Declaring new object and assigning it with RValue__ <br>
+Copy
+1. Copy the data of the existing object
+2. Assign to the new object
+
+Move
+1. Makes pointer of the declared object point to the data of the temp object
+2. Nulls out the pointer to the temp object
+3. Thus, unnecessary copying of data in the memory is avoided.
+
+```c++
+std::vector<Test> vec;
+vec.push_back(Test());  //move constructor
+```
+
+Move assignment
+- executed on a previously constructed object
+
+```c++
+Test &operator=(Test &&other){
+    std::cout << "Move assignment" << std::endl;
+    delete [] _pBuffer;
+    _pBuffer = other._pBuffer;
+    other._pBuffer = nullptr;
+    return *this;
+}
+
+Test test;
+test = getTest();
+```
+
+### 8.14 Casting
+
+By polymorphism, a parent pointer can point to a child object. <br>
+A child pointer, by default, cannot point to a parent object. <br>
+
+__static_const__ <br>
+`static_cast<>`, helps make the variable types correct at compile time. <br>
+But, this is prone to error (if super class does not have all of the sub class methods). <br>
+Use static_cast to allow child pointer to have a parent pointer value.
+
+```c++
+Parent parent;
+Brother brother;
+
+Parent *ppb = &brother;                         // Parent pointer to child object (downcast)
+Brother *pbb = static_cast<Brother *>(ppb);     // Child pointer to parent pointer (upcast)
+std::cout << pbb << std::endl;
+```
+Enter the desired data type inside the arrow brackets `<>`, then `()` the value.
+
+__dynamic_cast__<br>
+`dynamic_cast` helps make the variable types correct at run time. 
+
+Returns nullptr if the code is casting a parent object to a child pointer.
+```c++
+Parent *pp = &parent;
+Brother *pb = dynamic_cast<Brother *>(pp);
+
+if(pb == nullptr){
+    std::cout << "Invalid cast" << std::endl;
+    // occurs when parent object is casted to a child pointer (downcast)
+} else {
+std::cout << pb << std::endl;
+}
+```
+
+__reinterpret_cast__<br>
+If dynamic or static cast does not work. This operation involves less checking. <br>
+`Sister *ps3 = reinterpret_cast<Sister *>(pp);`
+
+### 8.15 Perfect Forwarding
+
+To obtain the correct inferred reference type.
+
+If the auto evaluates to a LValue reference, the reference will collapse and just become a LValue reference. (like `t = test;`)
+```c++
+Test test;
+auto &&t = test;    // reference collapsing
+```
+
+- If LValue is passed in the parameter, the inferred type will be T reference.
+- `&&arg` will be LValue due to reference collapsing.
+
+- If RValue is passed in the parameter, the inferred type will be LValue.
+- `&&arg` will be RValue.
+
+```c++
+template<typename T>
+void call(T &&arg){
+    //check(static_cast<T>(arg));
+    check(std::forward<T>(arg));
+}
+```
+
+### 8.16 Bind
+
+`#include <functional>`
+
+In `std::bind()`, the parameters are `(function_ptr, param1, param2, param3, ... )`. <br>
+The bind operator creates an alias of the function, possibly with placeholders for greater convenience. <br>
+Each time the binded function is called, it will run the function with the specified parameters.
+
+```c++
+int add(int a, int b, int c){
+    std::cout << a << ", " << b << ", " << c << std::endl;
+    return a+b+c;
+}
+
+auto sum = std::bind(add,3,4,5);
+sum();
+```
+
+```c++
+auto sum3 = std::bind(add, std::placeholders::_2, std::placeholders::_1, 10);
+sum3(20,30);
+```
+
+`std::placeholders::_2` will take the 2nd parameter of sum2 and pass it as 1st parameter of add. <br>
+`std::placeholders::_1` will take the 1st parameter of sum2 and pass it as 2nd parameter of add. <br>
+`10` will always be used as the 3rd parameter of add whenever sum3 is called.
+
+### 8.17 Unique Pointers
+
+`#include <memory>`
+
+```c++
+std::unique_ptr<int> pTest(new int);
+```
+
+Unique pointers will automatically clean up memory when the associated variable goes out of scope.
+
+Can use `{}` to define the scope in the code.
+
+### 8.18 Shared Pointers
+
+Memory will not be deleted until all the variables using that pointer have gone out of the scope.
+
+```c++
+std::shared_ptr<Test> pTest1(nullptr);
+std::shared_ptr<Test> pTest2 = std::make_shared<Test>();
+pTest1 = pTest2;
+```
