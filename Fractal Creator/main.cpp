@@ -1,60 +1,24 @@
-#include <memory>
 #include <iostream>
-#include "Bitmap.h"
-#include "Mandelbrot.h"
+#include "FractalCreator.h"
+#include "RGB.h"
 
 using namespace std;
 using namespace fyf;
 
 int main() {
 
-	int const WIDTH = 800;
-	int const HEIGHT = 600;
-	Bitmap bitmap(WIDTH, HEIGHT);
-	// bitmap bottom left is origin
+	FractalCreator fractalCreator(800, 600);	// bitmap bottom left is origin
 
-	std::unique_ptr<int[]> histogram(new int[fyf::Mandelbrot::MAX_ITERATIONS]{0});
-	std::unique_ptr<int[]> fractal(new int[WIDTH*HEIGHT]{ 0 });
+	// hardcoded zoom sequence, change the m_Center coordinates
+	fractalCreator.addZoom(Zoom(290, 202, 0.1));
+	fractalCreator.addZoom(Zoom(314, 314, 0.1));
 
-	// get iterations loop
-	for (int y = 0; y < HEIGHT; y++) {
-		for (int x = 0; x < WIDTH; x++) {
-			double xFractal = (x - WIDTH/2.0 - 200) / (HEIGHT/2.0);	// scale 0:800 to -1:1
-			double yFractal = (y - HEIGHT/2.0) / (HEIGHT/2.0);
+	fractalCreator.addRange(0.0, RGB(0, 0, 255));
+	fractalCreator.addRange(0.05, RGB(255, 99, 71));
+	fractalCreator.addRange(0.08, RGB(255, 215, 0));
+	fractalCreator.addRange(1.0, RGB(255, 255, 255));
 
-			int iterations = fyf::Mandelbrot::getIterations(xFractal, yFractal);
-			fractal[y * WIDTH + x] = iterations;
-
-			if(iterations != fyf::Mandelbrot::MAX_ITERATIONS) histogram[iterations]++;
-		}
-	}
-
-	// obtain total pixels not in mandelbrot set
-	int total = 0;
-	for (int i = 0; i < fyf::Mandelbrot::MAX_ITERATIONS; i++) {
-		total += histogram[i];
-	}
-
-	// coloring loop
-	for (int y = 0; y < HEIGHT; y++) {
-		for (int x = 0; x < WIDTH; x++) {
-
-			int iterations = fractal[y * WIDTH + x];
-		
-			double hue = 0.0;
-			for (int i = 0; i <= iterations; i++) {
-				hue += ((double)histogram[i]) / total;
-			}
-
-			uint8_t red = 0;
-			uint8_t green = hue*255;
-			uint8_t blue = 0;
-
-			bitmap.setPixel(x, y, red, green, blue);
-		}
-	}
-
-	bitmap.write("test.bmp");
+	fractalCreator.run("test.bmp");
 
 	std::cout << "Finished." << std::endl;
 

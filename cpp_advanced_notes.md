@@ -1184,3 +1184,35 @@ std::shared_ptr<Test> pTest1(nullptr);
 std::shared_ptr<Test> pTest2 = std::make_shared<Test>();
 pTest1 = pTest2;
 ```
+
+## Section 9: Miscellaneous
+
+valgrind to help check for memory leaks and other stuff.
+
+### Multiple Inheritance
+
+If the parent classes have the same method functions, need to disambiguate the desired method function from which parent class. <br>
+e.g. `MusicalInstrument::reset()`
+
+This requires knowledge of child and parent class implementations.
+
+Diamond problem: multiple inheritance from classes that share a base class.
+
+```c++
+class Synthesizer: public Machine, public MusicalInstrument{
+public:
+    virtual ~Synthesizer(){};
+};
+
+int main(){
+    Synthesizer *pSynth = new Synthesizer();
+
+    pSynth->play();
+    pSynth->start();
+    pSynth->MusicalInstrument::reset();
+    pSynth->Machine::reset();
+
+    delete pSynth;
+    return 0;
+}
+```

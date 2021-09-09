@@ -8,7 +8,6 @@ namespace fyf {
 	fyf::Bitmap::Bitmap(int width, int height) :
 		m_width(width), m_height(height), m_pPixels(
 			new uint8_t[width * height * 3]{ }) {
-
 	}
 
 	bool fyf::Bitmap::write(std::string filename) {
@@ -36,9 +35,7 @@ namespace fyf {
 
 		file.close();
 
-		if (!file) {
-			return false;
-		}
+		if (!file) return false;
 
 		return true;
 	}

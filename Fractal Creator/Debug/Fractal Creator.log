@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  ZoomList.cpp
+  main.cpp
+C:\Users\yufan\Documents\VSC Source\cpp_projects\Fractal Creator\main.cpp(57,16): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
+  Generating Code...
   Fractal Creator.vcxproj -> C:\Users\yufan\Documents\VSC Source\cpp_projects\Fractal Creator\Debug\Fractal Creator.exe
